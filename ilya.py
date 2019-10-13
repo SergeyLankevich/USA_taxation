@@ -14,10 +14,20 @@ while True:
     language = input('Please, choose language from proposed: ')
 
 def non_negative(x):
+    """
+
+    :param x: the number
+    :return: x if x > 0, else 0
+    """
     if x >= 0: return x
     else: return 0
 
 def single_subject(income):
+    """
+
+    :param income: user's annual income
+    :return: tax amount
+    """
     return round((non_negative(income - 406750) * 0.396 + non_negative(income % 406751 - 405100) * 0.35 +
             non_negative(income % 405101 - 186350) * 0.33 + non_negative(income % 186351 - 89350) * 0.28 +
             non_negative(income % 89351 - 36900) * 0.25 + non_negative(income % 36901 - 9075) * 0.15 +
