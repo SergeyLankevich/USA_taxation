@@ -1,10 +1,15 @@
+"""Case-study #2 USA tax system
+Developers:
+Malakhov I. (xx%), Lankevich S. (xx%)"""
+
 print('Please, choose language:')
 print('1. English')
 print('2. Russian')
 language = input()
 while True:
     if (language.lower() == 'english' or language == '1' or language == '1.' or language.lower() == '1. english' or
-        language.lower() == 'en' or language.lower() == 'eng'):
+        language.lower() == 'en' or language.lower() == 'eng')::
+        #TODO: Sergey
         import en_local as loc
         break
     elif (language.lower() == 'russian' or language == '2' or language == '2.' or language.lower() == '1. russian' or
@@ -34,9 +39,11 @@ def single_subject(income):
             non_negative(income % 9076) * 0.1) * 100) / 100
 
 def couple():
+    #TODO: Sergey
     pass
 
-def single_parent():
+def single_parent()::
+    #TODO: Sergey
     pass
 
 income = input(loc.INPUT_INCOME)
