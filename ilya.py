@@ -27,16 +27,26 @@ def non_negative(x):
     if x >= 0: return x
     else: return 0
 
+def trim(x, lim):
+    """
+    
+    :param x: the numberto be trimmed
+    :param lim: trim border
+    :return: 
+    """
+    if x <= lim:return lim
+    else: return lim
+
 def single_subject(income):
     """
 
     :param income: user's annual income
     :return: tax amount
     """
-    return round((non_negative(income - 406750) * 0.396 + non_negative(income % 406751 - 405100) * 0.35 +
-            non_negative(income % 405101 - 186350) * 0.33 + non_negative(income % 186351 - 89350) * 0.28 +
-            non_negative(income % 89351 - 36900) * 0.25 + non_negative(income % 36901 - 9075) * 0.15 +
-            non_negative(income % 9076) * 0.1) * 100) / 100
+    return round(non_negative(income - 406750) * 0.396 + non_negative(trim(income, 406750) - 405100) * 0.35 +
+            non_negative(trim(income, 405100) - 186350) * 0.33 + non_negative(trim(income, 186350) - 89350) * 0.28 +
+            non_negative(trim(income, 89350) - 36900) * 0.25 + non_negative(trim(income, 36900) - 9075) * 0.15 +
+            non_negative(trim(income, 9075)) * 0.1, 2)
 
 def couple():
     #TODO: Sergey
