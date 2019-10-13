@@ -1,4 +1,17 @@
-import ru_local as loc
+print('Please, choose language:')
+print('1. English')
+print('2. Russian')
+language = input()
+while True:
+    if (language.lower() == 'english' or language == '1' or language == '1.' or language.lower() == '1. english' or
+        language.lower() == 'en' or language.lower() == 'eng'):
+        import en_local as loc
+        break
+    elif (language.lower() == 'russian' or language == '2' or language == '2.' or language.lower() == '1. russian' or
+          language.lower() == 'ru' or language.lower() == 'rus'):
+        import ru_local as loc
+        break
+    language = input('Please, choose language from proposed: ')
 
 def non_negative(x):
     if x >= 0: return x
