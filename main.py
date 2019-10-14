@@ -47,7 +47,7 @@ def social_category():
                 return category
 
 
-# Annual income input (by month)     
+# Annual income input (by month)
 def income_counter():
     """
     :return: Total user's annual income
@@ -89,7 +89,11 @@ def taxable_sum(total_income, tax_deductions):
     :return: Taxable part of user's annual income (after tax deduction)
     """
     annual_income = total_income - tax_deductions
-    return annual_income
+    if annual_income <= 0:
+        print(loc.TD_MORE_THEN_INC)
+        exit()
+    else:
+        return annual_income
 
 
 def tax_calculation(annual_income, taxation_steps):
@@ -103,7 +107,11 @@ def tax_calculation(annual_income, taxation_steps):
             step = taxation_steps.index(i)
             break
 
-    initial_taxation = taxation_rate[step] * (annual_income - taxation_steps[step - 1])
+    if step == 0:
+        total_sum = taxation_rate[step] * (annual_income - 0)
+        return total_sum
+    else:
+        initial_taxation = taxation_rate[step] * (annual_income - taxation_steps[step - 1])
     second_sum = 0
 
     for k in range(1, step + 1):
