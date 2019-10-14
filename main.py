@@ -126,11 +126,11 @@ def tax_calculation(annual_income, taxation_steps):
 def main():
     category = social_category()
     if category == 1:
-        print(loc.TAX_AMOUNT, tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_subject))
+        print(loc.TAX_AMOUNT, round(tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_subject), 2))
     elif category == 2:
-        print(loc.TAX_AMOUNT, tax_calculation(taxable_sum(income_counter(), tax_deduction()), couple))
+        print(loc.TAX_AMOUNT, round(tax_calculation(taxable_sum(income_counter(), tax_deduction()), couple), 2))
     elif category == 3:
-        print(loc.TAX_AMOUNT, tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_parent))
+        print(loc.TAX_AMOUNT, round(tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_parent), 2))
 
 
 main()
