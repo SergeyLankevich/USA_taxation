@@ -2,21 +2,6 @@
 Developers:
 Malakhov I. (xx%), Lankevich S. (xx%)"""
 
-print('Please, choose language:')
-print('1. English')
-print('2. Russian')
-language = input()
-while True:
-    if (language.lower() == 'english' or language == '1' or language == '1.' or language.lower() == '1. english' or
-        language.lower() == 'en' or language.lower() == 'eng'):
-        import en_local as loc
-        break
-    elif (language.lower() == 'russian' or language == '2' or language == '2.' or language.lower() == '1. russian' or
-          language.lower() == 'ru' or language.lower() == 'rus'):
-        import ru_local as loc
-        break
-    language = input('Please, choose language from proposed: ')
-
 import math
 
 # Declaring tax rates of the USA:
@@ -27,8 +12,86 @@ single_subject = [9075, 36900, 89350, 186350, 405100, 406750, math.inf]
 couple = [18150, 73800, 148850, 226850, 405100, 457600, math.inf]
 single_parent = [12950, 49400, 127550, 206600, 405100, 432200, math.inf]
 
+# Choosing the language
+language = input('Choose your language:\n1.Russian\n2.English')
+while True:
+    if (language.lower() == 'english' or language == '1' or language == '1.' or language.lower() == '1. english' or
+            language.lower() == 'en' or language.lower() == 'eng'):
+        import en_local as loc
+
+        break
+    elif (language.lower() == 'russian' or language == '2' or language == '2.' or language.lower() == '1. russian' or
+          language.lower() == 'ru' or language.lower() == 'rus'):
+        import ru_local as loc
+
+        break
+    language = input('Please, choose language from proposed: ')
+
+
+# Choosing the social category
+def social_category():
+    """
+    :return: User's current social category
+    """
+    print(loc.CATEGORY_INPUT)
+    category = input()
+    while True:
+        try:
+            category = int(category)
+        except ValueError:
+            category = input(loc.INPUT_CORRECT_CATEGORY)
+        else:
+            if category != 1 and category != 2 and category != 3:
+                category = input(loc.INPUT_CORRECT_CATEGORY)
+            else:
+                return category
+
+
+# Annual income input (by month)     
+def income_counter():
+    """
+    :return: Total user's annual income
+    """
+    total_income = 0
+    for month in loc.MONTH_LIST:
+        income = input(loc.INPUT_INCOME)
+        try:
+            income = int(income)
+        except ValueError:
+            income = input(loc.INPUT_CORRECT_INCOME)
+        total_income += income
+    return total_income
+
+
+# Setting tax deduction
+def tax_deduction():
+    """
+    :return: Tax deductions
+    """
+    tax_deductions = input(loc.INPUT_TAX_DEDUCTIONS)
+    while True:
+        try:
+            tax_deductions = int(tax_deductions)
+        except ValueError:
+            tax_deductions = input(loc.INPUT_CORRECT_TAX_DEDUCTIONS)
+        else:
+            return tax_deductions
+
+
+# Calculating taxable part of income
+def taxable_sum(total_income, tax_deductions):
+    """
+    :param total_income: Total user's annual income
+    :param tax_deductions: Tax deductions
+    :return: Taxable part of user's annual income (after tax deduction)
+    """
+    annual_income = total_income - tax_deductions
+    return annual_income
+
+
 def tax_calculation(annual_income, taxation_steps):
     """
+    :param annual_income: Taxable part of user's annual income (after tax deduction)
     :param taxation_steps: Taxable annual income in USA divided in steps by tax rates.
     :return: Amount of tax paid.
     """
@@ -48,50 +111,19 @@ def tax_calculation(annual_income, taxation_steps):
     total_sum = initial_taxation + second_sum
     return total_sum
 
+
 def main():
-    income = input(loc.INPUT_INCOME)
-    while True:
-        try:
-            income = int(income)
-        except ValueError:
-            income = input(loc.INPUT_CORRECT_INCOME)
-        else:
-            break
+    social_category()
+    income_counter()
+    tax_deduction()
+    taxable_sum(income_counter(), tax_deduction())
+    
+    if social_category() == 1:
+        print(tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_subject))
+    elif social_category() == 2:
+        print(tax_calculation(taxable_sum(income_counter(), tax_deduction()), couple))
+    elif social_category() == 3:
+        print(tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_subject))
 
-
-    tax_deductions = input(loc.INPUT_TAX_DEDUCTIONS)
-    while True:
-        try:
-            tax_deductions = int(tax_deductions)
-        except ValueError:
-            tax_deductions = input(loc.INPUT_CORRECT_TAX_DEDUCTIONS)
-        else:
-            break
-
-    print(loc.CATEGORIES)
-    print(loc.CATEGORY_1)
-    print(loc.CATEGORY_2)
-    print(loc.CATEGORY_3)
-
-    category = input()
-    while True:
-        while True:
-            try:
-                category = int(category)
-            except ValueError:
-                category = input(loc.INPUT_CORRECT_CATEGORY)
-            else:
-                break
-        if category != 1 and category != 2 and category != 3:
-            category = input(loc.INPUT_CORRECT_CATEGORY)
-        else: break
-
-
-    if category == 1:
-        print(tax_calculation(income, single_subject))
-    elif category == 2:
-        print(tax_calculation(income, couple))
-    elif category == 3:
-        print(tax_calculation(income, single_parent))
 
 main()
