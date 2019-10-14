@@ -1,6 +1,6 @@
 """Case-study #2 USA tax system
 Developers:
-Malakhov I. (xx%), Lankevich S. (xx%)"""
+Malakhov I. (60%), Lankevich S. (60%)"""
 
 import math
 
