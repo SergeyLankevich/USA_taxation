@@ -13,15 +13,15 @@ couple = [18150, 73800, 148850, 226850, 405100, 457600, math.inf]
 single_parent = [12950, 49400, 127550, 206600, 405100, 432200, math.inf]
 
 # Choosing the language
-language = input('Choose your language:\n1.Russian\n2.English')
+language = input('Choose your language:\n1. Russian\n2. English')
 while True:
-    if (language.lower() == 'english' or language == '1' or language == '1.' or language.lower() == '1. english' or
-            language.lower() == 'en' or language.lower() == 'eng'):
+    if (language.lower() == 'english' or language == '2' or language == '2.' or language.lower() == '2. english' or
+        language.lower() == '2.english' or language.lower() == 'en' or language.lower() == 'eng'):
         import en_local as loc
 
         break
-    elif (language.lower() == 'russian' or language == '2' or language == '2.' or language.lower() == '1. russian' or
-          language.lower() == 'ru' or language.lower() == 'rus'):
+    elif (language.lower() == 'russian' or language == '1' or language == '1.' or language.lower() == '1. russian' or
+          language.lower() == '1.russian' or language.lower() == 'ru' or language.lower() == 'rus'):
         import ru_local as loc
 
         break
@@ -54,12 +54,15 @@ def income_counter():
     """
     total_income = 0
     for month in loc.MONTH_LIST:
-        income = input(loc.INPUT_INCOME)
-        try:
-            income = int(income)
-        except ValueError:
-            income = input(loc.INPUT_CORRECT_INCOME)
-        total_income += income
+        income = input(loc.INPUT_INCOME + month)
+        while True:
+            try:
+                income = int(income)
+            except ValueError:
+                income = input(loc.INPUT_CORRECT_INCOME)
+            else:
+                total_income += income
+                break
     return total_income
 
 
@@ -96,7 +99,7 @@ def tax_calculation(annual_income, taxation_steps):
     :return: Amount of tax paid.
     """
     for i in taxation_steps:
-        if i == annual_income or i > annual_income:
+        if i >= annual_income:
             step = taxation_steps.index(i)
             break
 
@@ -113,17 +116,13 @@ def tax_calculation(annual_income, taxation_steps):
 
 
 def main():
-    social_category()
-    income_counter()
-    tax_deduction()
-    taxable_sum(income_counter(), tax_deduction())
-    
-    if social_category() == 1:
-        print(tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_subject))
-    elif social_category() == 2:
-        print(tax_calculation(taxable_sum(income_counter(), tax_deduction()), couple))
-    elif social_category() == 3:
-        print(tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_subject))
+    category = social_category()
+    if category == 1:
+        print(loc.TAX_AMOUNT, tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_subject))
+    elif category == 2:
+        print(loc.TAX_AMOUNT, tax_calculation(taxable_sum(income_counter(), tax_deduction()), couple))
+    elif category == 3:
+        print(loc.TAX_AMOUNT, tax_calculation(taxable_sum(income_counter(), tax_deduction()), single_parent))
 
 
 main()
