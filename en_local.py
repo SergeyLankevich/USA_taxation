@@ -6,3 +6,4 @@ INPUT_CORRECT_TAX_DEDUCTIONS = 'Please input your tax deductions correctly (inte
 CATEGORY_INPUT = 'Choose a category from the proposed:\n1. Single subject.\n2. Married couple.\n3. Single parent.'
 INPUT_CORRECT_CATEGORY = 'Please select a category from the proposed: '
 TAX_AMOUNT = 'You must pay personal income tax of'
+TD_MORE_THEN_INC = 'You will not be taxed because the tax base is 0.'
