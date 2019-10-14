@@ -9,7 +9,6 @@ language = input()
 while True:
     if (language.lower() == 'english' or language == '1' or language == '1.' or language.lower() == '1. english' or
         language.lower() == 'en' or language.lower() == 'eng'):
-        #TODO: Sergey
         import en_local as loc
         break
     elif (language.lower() == 'russian' or language == '2' or language == '2.' or language.lower() == '1. russian' or
