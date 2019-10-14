@@ -13,7 +13,7 @@ couple = [18150, 73800, 148850, 226850, 405100, 457600, math.inf]
 single_parent = [12950, 49400, 127550, 206600, 405100, 432200, math.inf]
 
 # Choosing the language
-language = input('Choose your language:\n1. Russian\n2. English')
+language = input('Choose your language:\n1. Russian\n2. English\n')
 while True:
     if (language.lower() == 'english' or language == '2' or language == '2.' or language.lower() == '2. english' or
         language.lower() == '2.english' or language.lower() == 'en' or language.lower() == 'eng'):
@@ -54,7 +54,7 @@ def income_counter():
     """
     total_income = 0
     for month in loc.MONTH_LIST:
-        income = input(loc.INPUT_INCOME + month)
+        income = input(loc.INPUT_INCOME + month + ' ')
         while True:
             try:
                 income = int(income)
